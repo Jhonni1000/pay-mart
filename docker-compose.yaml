@@ -21,11 +21,11 @@ services:
             [emongo]
 
     webapi:
+        restart: always
         build:
             context: ./javaapi
         ports:
             - "9000:9000"
-        restart: always
         container_name: webapi
         depends_on:
             [emartdb]
