@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-dep
+  labels:
+    app: angular
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+        - name: angular
+          image: jhonni1000/paymart-angular:v1
+          ports:
+            - containerPort: 4200
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "64Mi"
+              memory: "250m"
+            limits:
+              cpu: "128Mi"
+              memory: "500m"
+            
+      
+    
