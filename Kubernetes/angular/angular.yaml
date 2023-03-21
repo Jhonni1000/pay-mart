@@ -20,13 +20,6 @@ spec:
           ports:
             - containerPort: 4200
               protocol: TCP
-          resources:
-            requests:
-              cpu: "64Mi"
-              memory: "250m"
-            limits:
-              cpu: "128Mi"
-              memory: "500m"
             
       
     
