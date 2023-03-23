@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-dep
+  labels:
+    app: mongodb-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-dep
+  template:
+    metadata:
+      labels:
+        app: mongodb-dep
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:4
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          env:
+            - MONGO_INITDB_DATABASE=epoc
