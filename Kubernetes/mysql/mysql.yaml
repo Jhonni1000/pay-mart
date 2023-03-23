@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb-dep
+  labels:
+    app: mysqldb-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqldb-dep
+  template:
+    metadata:
+      labels:
+        app: mysqldb-dep
+    spec:
+      containers:
+        - name: mysql
+          image: mysql
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+              
+    
