@@ -21,4 +21,5 @@ spec:
             - containerPort: 27017
               protocol: TCP
           env:
-            - MONGO_INITDB_DATABASE=epoc
+            - name: MONGO_INITDB_DATABASE
+              value: epoc
