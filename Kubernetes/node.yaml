@@ -20,6 +20,10 @@ spec:
           ports:
             - containerPort: 5000
               protocol: TCP
+      initContainers:
+         - name: init-mongo
+           image: busybox
+           command: ['sh', '-c', 'until nslookup mongodb; do echo waiitng for mongo; sleep 2; done' ]
             
       
     
