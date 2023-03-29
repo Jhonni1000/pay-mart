@@ -20,7 +20,4 @@ spec:
           ports:
             - containerPort: 9000
               protocol: TCP
-      initContainers:
-        - name: init-mysql
-          image: busybox:1.28
-          command: ['sh', 'c', 'until nslookup mysqldb-svc; do echo waiting for mydb; sleep 2; done']
+      
