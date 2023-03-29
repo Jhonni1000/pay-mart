@@ -22,5 +22,5 @@ spec:
               protocol: TCP
       initContainers:
         - name: init-mysql
-          image: busybox
+          image: busybox:1.28
           command: ['sh', 'c', 'until nslookup mysqldb-dep; do echo waiting for mydb; sleep 2; done;']
