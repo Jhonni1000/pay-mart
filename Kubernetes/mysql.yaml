@@ -15,7 +15,7 @@ spec:
         app: mysqldb-dep
     spec:
       containers:
-        - name: mysql
+        - name: emartdb
           image: mysql:5.7
           ports:
             - containerPort: 3306
