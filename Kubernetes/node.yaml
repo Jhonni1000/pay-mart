@@ -1,25 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-dep
   labels:
     app: node-app
+  name: api
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: node-app
+  strategy: {}
   template:
     metadata:
       labels:
         app: node-app
     spec:
       containers:
-        - name: node
-          image: jhonni1000/paymart-node:v1
+        - image: jhonni1000/paymart-node:v1
+          name: api
           ports:
             - containerPort: 5000
-              protocol: TCP
-            
-      
-    
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  ports:
+    - name: "5000"
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: node-app
+status:
+  loadBalancer: {}
