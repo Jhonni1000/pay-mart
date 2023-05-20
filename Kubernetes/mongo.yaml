@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-dep
   labels:
     app: mongodb-dep
+  name: emongo
 spec:
   replicas: 1
   selector:
@@ -15,11 +15,26 @@ spec:
         app: mongodb-dep
     spec:
       containers:
-        - name: emongo
-          image: mongo:4
-          ports:
-            - containerPort: 27017
-              protocol: TCP
-          env:
+        - env:
             - name: MONGO_INITDB_DATABASE
               value: epoc
+          image: mongo:4
+          name: emongo
+          ports:
+            - containerPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emongo
+spec:
+  ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  selector:
+    app: mongodb-dep
+status:
+  loadBalancer: {}
+

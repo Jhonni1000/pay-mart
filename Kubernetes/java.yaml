@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-dep
   labels:
     app: java
+  name: webapi
 spec:
   replicas: 1
   selector:
@@ -15,9 +15,22 @@ spec:
         app: java
     spec:
       containers:
-        - name: java
-          image: jhonni1000/paymart-java:v1
+        - image: jhonni1000/paymart-java:v1
+          name: webapi
           ports:
             - containerPort: 9000
-              protocol: TCP
-      
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapi
+spec:
+  ports:
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: java
+status:
+  loadBalancer: {}
