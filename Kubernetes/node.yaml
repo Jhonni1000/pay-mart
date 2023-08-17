@@ -20,6 +20,10 @@ spec:
           name: api
           ports:
             - containerPort: 5000
+      initContainers:
+        - name:  init-mongodb
+          image:  busybox
+          command: ['sh', '-c', 'until nslookup emongo.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
 
 ---
 apiVersion: v1

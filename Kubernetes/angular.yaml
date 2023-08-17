@@ -19,6 +19,13 @@ spec:
           name: client
           ports:
             - containerPort: 4200
+      initContainers:
+        - name:  init-api
+          image:  busybox
+          command: ['sh', '-c', 'until nslookup api.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
+        - name:  init-webapi
+          image:  busybox
+          command: ['sh', '-c', 'until nslookup webapi.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
 
 ---
 apiVersion: v1

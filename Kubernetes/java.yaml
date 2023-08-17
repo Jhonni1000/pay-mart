@@ -19,6 +19,10 @@ spec:
           name: webapi
           ports:
             - containerPort: 9000
+      initContainers:
+        - name:  init-emartdb
+          image:  busybox
+          command: ['sh', '-c', 'until nslookup emartdb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
 
 ---
 apiVersion: v1
